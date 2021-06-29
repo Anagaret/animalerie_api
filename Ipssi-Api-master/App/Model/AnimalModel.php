@@ -38,8 +38,8 @@ class AnimalModel {
 
     public function create(array $data)
     {
-        $statement = "INSERT INTO animaux (nom, espece, race, age, poids, taille, image, description, couleur) 
-            VALUES (:nom, :espece, :race, :age, :poids, :taille, :image, :description, :couleur)";
+        $statement = "INSERT INTO animaux (nom, espece, race, age, poids, taille, image, description, couleur, sexe, sterile) 
+            VALUES (:nom, :espece, :race, :age, :poids, :taille, :image, :description, :couleur, :sexe, :sterile)";
         return $this->db->prepare($statement, $data);
     }
 
@@ -55,7 +55,9 @@ class AnimalModel {
             taille = :taille, 
             image = :image, 
             description = :description, 
-            couleur = :couleur
+            couleur = :couleur,
+            sexe = :sexe, 
+            sterile = :sterile
             WHERE id = $id";
         
         return $this->db->prepare($statement, $data);

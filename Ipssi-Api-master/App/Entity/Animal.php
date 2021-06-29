@@ -13,7 +13,9 @@ class Animal {
     public $couleur,
     public $is_adopted = null,
     public $adoption_date = false,
-    public $image
+    public $image,
+    public $sexe,
+    public $sterile
 
     /**
      * Get the value of id
@@ -195,6 +197,40 @@ class Animal {
     public function setImage($image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+    /**
+     * Get the value of sexe
+     */
+    public function getSexe()
+    {
+        return $this->sexe;
+    }
+
+    /**
+     * Set the value of sexe
+     */
+    public function setSexe($sexe): self
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+    /**
+     * Get the value of sterile
+     */
+    public function getSterile()
+    {
+        return $this->sterile;
+    }
+
+    /**
+     * Set the value of sterile
+     */
+    public function setSterile($sterile): self
+    {
+        $this->sterile = $sterile;
 
         return $this;
     }
