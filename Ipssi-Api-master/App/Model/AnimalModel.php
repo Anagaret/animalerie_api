@@ -20,7 +20,7 @@ class AnimalModel {
      */
     public function findAll() :array
     {
-        $statement = "SELECT * FROM Animal";
+        $statement = "SELECT * FROM animaux";
         return $this->db->query($statement, $this->className);
     }
 
@@ -32,27 +32,38 @@ class AnimalModel {
      */
     public function find(int $id) :Animal
     {
-        $statement = "SELECT * FROM Animal WHERE id = $id";
+        $statement = "SELECT * FROM animaux WHERE id = $id";
         return $this->db->query($statement, $this->className, true);
     }
 
     public function create(array $data)
     {
-        $statement = "INSERT INTO Animal (name) 
-            VALUES (:name)";
+        $statement = "INSERT INTO animaux (nom, espece, race, age, poids, taille, image, description, couleur) 
+            VALUES (:nom, :espece, :race, :age, :poids, :taille, :image, :description, :couleur)";
         return $this->db->prepare($statement, $data);
     }
 
     public function update(int $id, array $data)
     {
-        $statement = "UPDATE Animal SET name = :name WHERE id = $id";
+        $statement = "UPDATE animaux SET 
+            name = :name ,
+            nom = :nom, 
+            espece = :espece, 
+            race = :race, 
+            age = :age, 
+            poids = :poids, 
+            taille = :taille, 
+            image = :image, 
+            description = :description, 
+            couleur = :couleur
+            WHERE id = $id";
         
         return $this->db->prepare($statement, $data);
     }
 
     public function delete(int $id)
     {
-        $statement = "DELETE FROM Animal WHERE id = $id";
+        $statement = "DELETE FROM animaux WHERE id = $id";
 
         return $this->db->prepare($statement, array());
     }

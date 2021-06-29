@@ -16,10 +16,10 @@ class ProduitController extends DefaultController{
         $data = array();
         foreach ($this->model->findAll() as $value) {
             $value->links = [
-                "categorie" => SERVER . "categorie/". $value->categorie_id,
+                "animal" => SERVER . "animal/". $value->$value->id,
                 "user" => SERVER . "user/". $value->user_id,
-                "update" => SERVER . "Produit/". $value->id ."/update",
-                "delete" => SERVER . "Produit/". $value->id ."/delete"
+                "update" => SERVER . "produit/". $value->id ."/update",
+                "delete" => SERVER . "produit/". $value->id ."/delete"
             ];
             $data[] = $value;
         }

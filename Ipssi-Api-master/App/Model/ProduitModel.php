@@ -20,7 +20,7 @@ class ProduitModel {
      */
     public function findAll() :array
     {
-        $statement = "SELECT * FROM produit";
+        $statement = "SELECT * FROM produits";
         return $this->db->query($statement, $this->className);
     }
 
@@ -32,24 +32,25 @@ class ProduitModel {
      */
     public function find(int $id) :Produit
     {
-        $statement = "SELECT * FROM Produit WHERE id = $id";
+        $statement = "SELECT * FROM produits WHERE id = $id";
         return $this->db->query($statement, $this->className, true);
     }
 
     public function create(array $data)
     {
-        $statement = "INSERT INTO Produit (title, content, categorie_id, user_id) 
-            VALUES (:title, :content, :categorie_id, :user_id)";
+        $statement = "INSERT INTO nom (title, type, cible, description, image, prix) 
+            VALUES (:nom, :type, :cible, :description, :image, :prix)";
         return $this->db->prepare($statement, $data);
     }
 
     public function update(array $data)
     {
-        $statement = "UPDATE Produit SET
-                        title = :title,
-                        content = :content,
-                        categorie_id = :categorie_id,
-                        user_id = :user_id
+        $statement = "UPDATE produits SET
+                        nom = :nom,
+                        type = :type,
+                        cible = :cible,
+                        description = :description,
+                        image = :image
                         ";
         
         return $this->db->prepare($statement, $data);
@@ -57,7 +58,7 @@ class ProduitModel {
 
     public function delete(int $id)
     {
-        $statement = "DELETE FROM Produit WHERE id = $id";
+        $statement = "DELETE FROM produits WHERE id = $id";
 
         return $this->db->prepare($statement, array());
     }

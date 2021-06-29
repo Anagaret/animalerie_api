@@ -5,6 +5,7 @@ class Animal {
 
     public $id;
     public $nom,
+    public $espece,
     public $race,
     public $age,
     public $poids,
@@ -36,6 +37,24 @@ class Animal {
     public function setNom($nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of espece
+     */
+    public function getEspece()
+    {
+        return $this->espece;
+    }
+
+    /**
+     * Set the value of espece
+     */
+    public function setEspece($espece): self
+    {
+        $this->espece = $espece;
 
         return $this;
     }
