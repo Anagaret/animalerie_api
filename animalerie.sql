@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `produits` (
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `peseudo` varchar(255) NOT NULL,
+  `pseudo` varchar(255) NOT NULL,
   `mail` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `admin` tinyint(1) NOT NULL DEFAULT '0'
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`peseudo`, `mail`, `password`, `admin`) VALUES
+INSERT INTO `user` (`pseudo`, `mail`, `password`, `admin`) VALUES
 ('admin', 'admin@admin.com', 'admin', 1);
 COMMIT;
 
