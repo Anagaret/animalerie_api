@@ -13,17 +13,8 @@ class ProduitController extends DefaultController{
 
     public function list ()
     {
-        $data = array();
-        foreach ($this->model->findAll() as $value) {
-            $value->links = [
-                "animal" => SERVER . "animal/". $value->$value->id,
-                "user" => SERVER . "user/". $value->user_id,
-                "update" => SERVER . "produit/". $value->id ."/update",
-                "delete" => SERVER . "produit/". $value->id ."/delete"
-            ];
-            $data[] = $value;
-        }
-        $this->jsonResponse($data);
+        
+        $this->jsonResponse($this->model->findAll());
     }
 
     public function single (int $id)

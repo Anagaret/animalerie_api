@@ -1,8 +1,6 @@
+<?php namespace App\Entity;
 
-<?php
-namespace App\Entity;
-
-class Article {
+class Produit {
 
     public $id;
     

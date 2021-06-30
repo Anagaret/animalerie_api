@@ -1,12 +1,13 @@
 <?php
 namespace App\Entity;
 
-class Animal {
+class Blog {
 
     public $id;
-    public $pseudo,
-    public $montant,
-    public $date
+    public $pseudo;
+    public $titre;
+    public $date;
+    public $message;
 
     /**
      * Get the value of id
@@ -35,19 +36,19 @@ class Animal {
     }
 
     /**
-     * Get the value of montant
+     * Get the value of titre
      */
-    public function getMontant()
+    public function getTitre()
     {
-        return $this->montant;
+        return $this->titre;
     }
 
     /**
-     * Set the value of montant
+     * Set the value of titre
      */
-    public function setMontant($montant): self
+    public function setTitre($titre): self
     {
-        $this->montant = $montant;
+        $this->titre = $titre;
 
         return $this;
     }
@@ -55,7 +56,7 @@ class Animal {
     /**
      * Get the value of date
      */
-    public function getDate)
+    public function getDate()
     {
         return $this->date;
     }
@@ -66,6 +67,23 @@ class Animal {
     public function setDate($date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+    /**
+     * Get the value of message
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * Set the value of message
+     */
+    public function setMessage($message): self
+    {
+        $this->message = $message;
 
         return $this;
     }

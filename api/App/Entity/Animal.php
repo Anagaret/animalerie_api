@@ -4,18 +4,19 @@ namespace App\Entity;
 class Animal {
 
     public $id;
-    public $nom,
-    public $espece,
-    public $race,
-    public $age,
-    public $poids,
-    public $taille,
-    public $couleur,
-    public $is_adopted = null,
-    public $adoption_date = false,
-    public $image,
-    public $sexe,
-    public $sterile
+    public $nom;
+    public $espece;
+    public $race;
+    public $age;
+    public $poids;
+    public $taille;
+    public $image;
+    public $description;
+    public $couleur;
+    public $adopted ;
+    public $adoptionDate ;
+    public $sexe;
+    public $sterile;
 
     /**
      * Get the value of id
@@ -42,6 +43,23 @@ class Animal {
 
         return $this;
     }
+    /**
+     * Get the value of description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set the value of description
+     */
+    public function setDescription($description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
 
     /**
      * Get the value of espece
@@ -64,7 +82,7 @@ class Animal {
     /**
      * Get the value of race
      */
-    public function getRace)
+    public function getRace()
     {
         return $this->race;
     }
@@ -92,7 +110,7 @@ class Animal {
      */
     public function setAge($age): self
     {
-        $this->age = $categageorie_id;
+        $this->age = $age;
 
         return $this;
     }
@@ -150,36 +168,36 @@ class Animal {
         return $this;
     }
     /**
-     * Get the value of is_adopted
+     * Get the value of adopted
      */
     public function getIsAdopted()
     {
-        return $this->is_adopted;
+        return $this->adopted;
     }
 
     /**
      * Set the value of is_adopted
      */
-    public function setIsAdopted($is_adopted): self
+    public function setIsAdopted($adopted): self
     {
-        $this->is_adopted = $is_adopted;
+        $this->adopted = $adopted;
 
         return $this;
     }
     /**
-     * Get the value of adoption_date
+     * Get the value of adoptionDate
      */
     public function getAdoptionDate()
     {
-        return $this->adoption_date;
+        return $this->adoptionDate;
     }
 
     /**
-     * Set the value of adoption_date
+     * Set the value of adoptionDate
      */
-    public function setAdoptionDate($adoption_date): self
+    public function setAdoptionDate($adoptionDate): self
     {
-        $this->adoption_date = $adoption_date;
+        $this->adoptionDate = $adoptionDate;
 
         return $this;
     }

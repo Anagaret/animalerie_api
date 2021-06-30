@@ -20,8 +20,10 @@ class ProduitModel {
      */
     public function findAll() :array
     {
-        $statement = "SELECT * FROM produits";
-        return $this->db->query($statement, $this->className);
+        $statement = "SELECT * FROM `produits`";
+
+        $test=  $this->db->query($statement, $this->className);
+        return $test;
     }
 
     /**
@@ -38,7 +40,7 @@ class ProduitModel {
 
     public function create(array $data)
     {
-        $statement = "INSERT INTO nom (title, type, cible, description, image, prix) 
+        $statement = "INSERT INTO produits (nom, type, cible, description, image, prix) 
             VALUES (:nom, :type, :cible, :description, :image, :prix)";
         return $this->db->prepare($statement, $data);
     }

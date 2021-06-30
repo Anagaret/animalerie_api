@@ -1,13 +1,12 @@
 <?php
 namespace App\Entity;
 
-class Animal {
+class Don {
 
     public $id;
-    public $pseudo
-    public $titre;
-    public $date
-    public $message
+    public $pseudo;
+    public $montant;
+    public $date;
 
     /**
      * Get the value of id
@@ -36,19 +35,19 @@ class Animal {
     }
 
     /**
-     * Get the value of titre
+     * Get the value of montant
      */
-    public function getTitre()
+    public function getMontant()
     {
-        return $this->titre;
+        return $this->montant;
     }
 
     /**
-     * Set the value of titre
+     * Set the value of montant
      */
-    public function setTitre($titre): self
+    public function setMontant($montant): self
     {
-        $this->titre = $titre;
+        $this->montant = $montant;
 
         return $this;
     }
@@ -56,7 +55,7 @@ class Animal {
     /**
      * Get the value of date
      */
-    public function getDate)
+    public function getDate()
     {
         return $this->date;
     }
@@ -67,23 +66,6 @@ class Animal {
     public function setDate($date): self
     {
         $this->date = $date;
-
-        return $this;
-    }
-    /**
-     * Get the value of message
-     */
-    public function getMessage)
-    {
-        return $this->message;
-    }
-
-    /**
-     * Set the value of message
-     */
-    public function setMessage($message): self
-    {
-        $this->message = $message;
 
         return $this;
     }

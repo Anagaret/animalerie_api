@@ -1,13 +1,13 @@
 <?php
 namespace App\Entity;
 
-class Animal {
+class User {
 
     public $id;
-    public $pseudo,
-    public $mail,
-    public $password,
-    public $admin = null
+    public $pseudo;
+    public $mail;
+    public $password;
+    public $admin = null;
 
     /**
      * Get the value of id
@@ -56,7 +56,7 @@ class Animal {
     /**
      * Get the value of password
      */
-    public function getPassword)
+    public function getPassword()
     {
         return $this->password;
     }

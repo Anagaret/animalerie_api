@@ -4,7 +4,7 @@ namespace App\Model;
 use Core\Database;
 use App\Entity\Don;
 
-class AnimalModel {
+class DonModel {
 
     private $className = "App\Entity\Don";
 
@@ -38,8 +38,8 @@ class AnimalModel {
 
     public function create(array $data)
     {
-        $statement = "INSERT INTO dons (pseudo, montant, date) 
-            VALUES (:pseudo, :montant, :date)";
+        $statement = "INSERT INTO dons (pseudo, montant) 
+            VALUES (:pseudo, :montant)";
         return $this->db->prepare($statement, $data);
     }
 

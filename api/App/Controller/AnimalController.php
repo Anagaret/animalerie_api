@@ -16,24 +16,25 @@ class AnimalController extends DefaultController{
         $this->jsonResponse($this->model->findAll());
     }
 
-    public function single ($id)
+    public function single (int $id)
     {
-        $this->jsonResponse($this->model->find($id));
+            $this->jsonResponse($this->model->find($id));
     }
 
     public function create ($data) 
     {
         $save = $this->model->create($data);
         if ($save === true) {
-            $this->saveJsonResponse("Animal bien enregistrée");
+            $this->saveJsonResponse("Animal bien enregistré");
         } else {
             $this->BadRequestJsonResponse($save);
         }
+
     }
 
-    public function update (int $id, array $data) 
+    public function update ($data) 
     {
-        $this->jsonResponse($this->model->update($id, $data));
+        $this->jsonResponse($this->model->update($data));
 
     }
 

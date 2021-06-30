@@ -4,7 +4,7 @@ namespace App\Model;
 use Core\Database;
 use App\Entity\Blog;
 
-class AnimalModel {
+class BlogModel {
 
     private $className = "App\Entity\Blog";
 
@@ -25,12 +25,12 @@ class AnimalModel {
     }
 
     /**
-     * Return an don
+     * Return an Blog
      *
      * @param int $id
-     * @return Don
+     * @return Blog
      */
-    public function find(int $id) :Don
+    public function find(int $id) :Blog
     {
         $statement = "SELECT * FROM blog WHERE id = $id";
         return $this->db->query($statement, $this->className, true);
@@ -38,17 +38,16 @@ class AnimalModel {
 
     public function create(array $data)
     {
-        $statement = "INSERT INTO blog (pseudo, titre, date,message) 
-            VALUES (:pseudo, :titre, :date, :message)";
+        $statement = "INSERT INTO blog (pseudo, titre, message) 
+            VALUES (:pseudo, :titre,  :message)";
         return $this->db->prepare($statement, $data);
     }
 
     public function update(int $id, array $data)
     {
-        $statement = "UPDATE dons SET 
+        $statement = "UPDATE blog SET 
             pseudo = :pseudo ,
             titre = :titre, 
-            date = :date,
             message = :message
             WHERE id = $id";
         

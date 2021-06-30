@@ -1,8 +1,8 @@
 <?php
 namespace App\Model;
 
-use Core\Database;
 use App\Entity\Animal;
+use Core\Database;
 
 class AnimalModel {
 
@@ -14,14 +14,15 @@ class AnimalModel {
     }
 
     /**
-     * return list of Animaux
+     * return list of Animals
      *
      * @return Animal[]
      */
     public function findAll() :array
     {
         $statement = "SELECT * FROM animaux";
-        return $this->db->query($statement, $this->className);
+        $test =  $this->db->query($statement, $this->className);
+        return $test;
     }
 
     /**
@@ -38,27 +39,26 @@ class AnimalModel {
 
     public function create(array $data)
     {
-        $statement = "INSERT INTO animaux (nom, espece, race, age, poids, taille, image, description, couleur, sexe, sterile) 
-            VALUES (:nom, :espece, :race, :age, :poids, :taille, :image, :description, :couleur, :sexe, :sterile)";
+        $statement = "INSERT INTO animaux (nom, espece, race, age, poids, taille, image, description, couleur, sexe) 
+            VALUES (:nom, :espece, :race, :age, :poids, :taille, :image, :description , :couleur, :sexe)";
         return $this->db->prepare($statement, $data);
     }
 
-    public function update(int $id, array $data)
+    public function update(array $data)
     {
-        $statement = "UPDATE animaux SET 
-            name = :name ,
-            nom = :nom, 
-            espece = :espece, 
-            race = :race, 
-            age = :age, 
-            poids = :poids, 
-            taille = :taille, 
-            image = :image, 
-            description = :description, 
-            couleur = :couleur,
-            sexe = :sexe, 
-            sterile = :sterile
-            WHERE id = $id";
+        $statement = "UPDATE animaux SET
+                        nom = :nom,
+                        espece = :espece, 
+                        race = :race,
+                        age = :age,
+                        poids = :poids, 
+                        taille = :taille, 
+                        image = :image, 
+                        description = :description, 
+                        couleur = :couleur, 
+                        sexe = :sexe
+                        where id = :id
+                        ";
         
         return $this->db->prepare($statement, $data);
     }

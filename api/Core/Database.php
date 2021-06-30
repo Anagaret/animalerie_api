@@ -6,15 +6,18 @@ class Database {
     private $pdo;
     public function __construct()
     {
-        $this->pdo = new \PDO("mysql:host=localhost:8889;dbname=animalerie", "root", "root", [
+        $this->pdo = new \PDO("mysql:host=localhost:3306;dbname=animalerie", "root", "", [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
         ]);
+        $this->pdo->exec("SET NAMES UTF8");
     }
 
     public function query(string $statement, string $className ,bool $one=false)
     {
+        
         try {
             $query = $this->pdo->query($statement, \PDO::FETCH_CLASS, $className);
+            var_dump($query);
             $data = null;
             if ($one) {
                 $data = $query->fetch();

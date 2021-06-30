@@ -13,6 +13,7 @@ if ($rMethod === "GET") {
     if (isset($uri[2]) && preg_match("[\d]", $uri[2]) && !isset($uri[3])) {
         $cont->single($uri[2]);
     } elseif (!isset($uri[2])) {
+        
         $cont->list();
     } else {
         $cont->badRequestJsonResponse();
@@ -47,3 +48,4 @@ if ($rMethod === "GET") {
         $cont->badRequestJsonResponse("$entity not found please try with another id.");
     }
 }
+
