@@ -1,0 +1,1532 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api de blog du cours Api",
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "sandbox-server"
+        }
+    ],
+    "paths": {
+        "/animal": {
+            "get": {
+                "summary": "List all animals",
+                "description": "List all animals",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit permettant la pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List all animals",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Animal[]",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Animal"
+                                    }
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/animal/{id}": {
+            "get": {
+                "summary": "return an animal",
+                "description": "return an animal",
+                "operationId": "e84f7fbb9a58ad9ffc06280fd53931a8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de l'animal à récupérer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return an animal",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Animal"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/animal/create": {
+            "post": {
+                "summary": "Create an animal",
+                "description": "Save animal in DB",
+                "operationId": "6656c4c0539c20b0329a777ba83e11db",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Animal à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "Charlie"
+                                    },
+                                    "espece": {
+                                        "type": "string",
+                                        "example": "Chiens"
+                                    },
+                                    "couleur": {
+                                        "type": "string",
+                                        "example": "Blanc et marron"
+                                    },
+                                    "race": {
+                                        "type": "string",
+                                        "example": "Welsh Corgi Pembroke"
+                                    },
+                                    "age": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "taille": {
+                                        "type": "double",
+                                        "example": 0.5
+                                    },
+                                    "poids": {
+                                        "type": "double",
+                                        "example": 10
+                                    },
+                                    "sexe": {
+                                        "type": "bit",
+                                        "example": 0
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Très joueur"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "example": "https://www.centrale-canine.fr/sites/default/files/2019-02/Big%20Woods%20Thomas%20O%27Malley%20%28Johana%20Flink%29.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Animal enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/animal/{id}/update": {
+            "put": {
+                "summary": "Update animal",
+                "description": "Update animal in Db",
+                "operationId": "9becc98c0e82e95fc87181945fe032e7",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de l'animal à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Nouvelles données de l'animal",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "Charlie"
+                                    },
+                                    "espece": {
+                                        "type": "string",
+                                        "example": "Chiens"
+                                    },
+                                    "couleur": {
+                                        "type": "string",
+                                        "example": "Blanc et marron"
+                                    },
+                                    "race": {
+                                        "type": "string",
+                                        "example": "Welsh Corgi Pembroke"
+                                    },
+                                    "age": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "taille": {
+                                        "type": "double",
+                                        "example": 0.5
+                                    },
+                                    "poids": {
+                                        "type": "double",
+                                        "example": 12
+                                    },
+                                    "sexe": {
+                                        "type": "bit",
+                                        "example": 0
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Très joueur"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "example": "https://www.centrale-canine.fr/sites/default/files/2019-02/Big%20Woods%20Thomas%20O%27Malley%20%28Johana%20Flink%29.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Animal enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/animal/{id}/delete": {
+            "delete": {
+                "summary": "Delete animal",
+                "description": "Delete animal in Db",
+                "operationId": "102e6a5cf41dafbe072e95225b6587d3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de l'animal à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Suppression validée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Animal supprimé"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/blog": {
+            "get": {
+                "summary": "List all blog messages",
+                "description": "List all blog messages",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit permettant la pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List all blog messages",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Blog[]",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Blog"
+                                    }
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/blog/{id}": {
+            "get": {
+                "summary": "return a blog message",
+                "description": "return a blog message",
+                "operationId": "27e01b7270e2200f5bde1c9c52fe6225",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du message de blog à récupérer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return a blog message",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Blog"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/blog/create": {
+            "post": {
+                "summary": "Create a blog message",
+                "description": "Save a blog message in DB",
+                "operationId": "6cf98894e728d7fc44dccd2bc636f3f0",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Message à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "pseudo": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Voici un message"
+                                    },
+                                    "titre": {
+                                        "type": "string",
+                                        "example": "Bonjour"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Message de blog enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/blog/{id}/update": {
+            "put": {
+                "summary": "Update blog",
+                "description": "Update blog in Db",
+                "operationId": "1cc25fc2547f0b7f8696cff771087213",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du message de blog à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Nouvelles données du message de blog",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "pseudo": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Voici un message"
+                                    },
+                                    "titre": {
+                                        "type": "string",
+                                        "example": "Bonjour"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Message enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/blog/{id}/delete": {
+            "delete": {
+                "summary": "Delete blog",
+                "description": "Delete blog in Db",
+                "operationId": "3f28c394f40d3fae23c0f5e92d1dc306",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du blog à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Suppression validée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Blog message supprimé"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/don": {
+            "get": {
+                "summary": "List all donations",
+                "description": "List all donations",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit permettant la pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List all donations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Don[]",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Don"
+                                    }
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/don/{id}": {
+            "get": {
+                "summary": "return a donation",
+                "description": "return a donation",
+                "operationId": "2359083d99f65aeb11c69d08d6c3bc6a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du don à récupérer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return a donation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Don"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/don/create": {
+            "post": {
+                "summary": "Create a donation",
+                "description": "Save donation in DB",
+                "operationId": "aa748e7fd4ae5367a067fafba62113da",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Don à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "pseudo": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "montant": {
+                                        "type": "double",
+                                        "example": 50.5
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Don enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/don/{id}/update": {
+            "put": {
+                "summary": "Update donation",
+                "description": "Update donation in Db",
+                "operationId": "d311a28bb723860b4767ce20e8bbec49",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de don à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Nouvelles données du don",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "pseudo": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "montant": {
+                                        "type": "double",
+                                        "example": 40.5
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Don enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/don/{id}/delete": {
+            "delete": {
+                "summary": "Delete donation",
+                "description": "Delete donation in Db",
+                "operationId": "0ef5832b6feb1196eb78fd5cfd051394",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du don à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Suppression validée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Don supprimé"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produit": {
+            "get": {
+                "summary": "List all products",
+                "description": "List all products",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit permettant la pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List all products",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Produit[]",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Produit"
+                                    }
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produit/{id}": {
+            "get": {
+                "summary": "return a produiuct",
+                "description": "return a product",
+                "operationId": "abcbc550c1a09c8c10800255187236f8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du produit à récupérer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return a product",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Produit"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produit/create": {
+            "post": {
+                "summary": "Create a product",
+                "description": "Save product in DB",
+                "operationId": "ddf41842d908a155aefc396a46453626",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Produit à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "Collier rouge"
+                                    },
+                                    "cible": {
+                                        "type": "string",
+                                        "example": "Chiens"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "Accessoires"
+                                    },
+                                    "prix": {
+                                        "type": "number",
+                                        "example": 5.5
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Collier rouge largeur 2 cm"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "example": "https://www.wanimo.com/images/collier_laisse_et_harnais/A/SM/ASMS040/500x500/01/collier-basic-en-cuir-rouge-martin-sellier.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Produit enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produit/{id}/update": {
+            "put": {
+                "summary": "Update product",
+                "description": "Update product in Db",
+                "operationId": "5c1e704b31058f22d39dab48c39cd361",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du produit à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Nouvelles données du produit",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "Collier rouge"
+                                    },
+                                    "cible": {
+                                        "type": "string",
+                                        "example": "Chiens"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "Accessoire"
+                                    },
+                                    "prix": {
+                                        "type": "double",
+                                        "example": 5.5
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Collier rouge largeur 2 cm"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "example": "https://www.wanimo.com/images/collier_laisse_et_harnais/A/SM/ASMS040/500x500/01/collier-basic-en-cuir-rouge-martin-sellier.jpg"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Produit enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produit/{id}/delete": {
+            "delete": {
+                "summary": "Delete product",
+                "description": "Delete product in Db",
+                "operationId": "186a1916d4649a776e3188d4e57e4cf0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du produit à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Suppression validée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Produit supprimé"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get": {
+                "summary": "List all users",
+                "description": "List all users",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit permettant la pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List all users",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "User[]",
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id}": {
+            "get": {
+                "summary": "return an user",
+                "description": "return an user",
+                "operationId": "d138e9193cd45f1eb1918799a8ed68f1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du user à récupérer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return an user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "apiKey missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "apikey manquante",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/create": {
+            "post": {
+                "summary": "Create a user",
+                "description": "Save user in DB",
+                "operationId": "98b434dccc5dec3867bff3bfd627c328",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "User à enregistrer",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "mail": {
+                                        "type": "string",
+                                        "example": "test@test.fr"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "pseudo": {
+                                        "type": "string",
+                                        "example": "monPseudo"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id}/update": {
+            "put": {
+                "summary": "Update user",
+                "description": "Update user in Db",
+                "operationId": "3836ec0c142804baed2aff15cd034654",
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id de user à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Nouvelles données du user",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "mail": {
+                                        "type": "string",
+                                        "example": "test@test.fr"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    },
+                                    "pseudo": {
+                                        "type": "string",
+                                        "example": "monPseudo"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User enregistré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id}/delete": {
+            "delete": {
+                "summary": "Delete user",
+                "description": "Delete user in Db",
+                "operationId": "9f3e51a28896dfbcbc01af192590a39a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id du user à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "apikey",
+                        "in": "query",
+                        "description": "apikey permettant de valider l'application",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Suppression validée",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "User supprimé"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
